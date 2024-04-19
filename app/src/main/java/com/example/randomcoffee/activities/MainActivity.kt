@@ -1,7 +1,8 @@
-package com.example.randomcoffee
+package com.example.randomcoffee.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.randomcoffee.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
