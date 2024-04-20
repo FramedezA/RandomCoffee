@@ -1,14 +1,16 @@
 package com.example.randomcoffee.services
 
 import androidx.fragment.app.Fragment
+import com.example.randomcoffee.fragments.LoginFragment
+import com.example.randomcoffee.fragments.RegistrationFragment
 
 class FragmentFactory {
     fun createFragment(fragmentType: Int): Fragment {
         return when (fragmentType) {
-          /*  FRAGMENT_MAP -> MapFragment()
-            FRAGMENT_PROFILE -> EntriesBottomSheetFragment()
+          //  FRAGMENT_MAP -> MapFragment()
+           // FRAGMENT_PROFILE -> EntriesBottomSheetFragment()
             FRAGMENT_LOGIN -> LoginFragment()
-            FRAGMENT_REGISTRATION -> RegistrationFragment()*/
+            FRAGMENT_REGISTRATION -> RegistrationFragment()
             else -> throw IllegalArgumentException("Invalid fragment type")
         }
     }

@@ -5,14 +5,16 @@ plugins {
 
 android {
     namespace = "com.example.randomcoffee"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.randomcoffee"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled= true
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,7 +35,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding =true
+        buildConfig =true
+    }
+
+
+
 }
+
 
 dependencies {
 
@@ -47,5 +58,11 @@ dependencies {
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+    implementation ("android.arch.lifecycle:extensions:1.1.1")
+    implementation ("androidx.activity:activity-ktx:1.9.0")
+
 
 }
