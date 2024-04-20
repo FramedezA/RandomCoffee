@@ -1,5 +1,7 @@
 package com.example.randomcoffee.services.storage
 
+import com.example.randomcoffee.data_structures.UserForm
+
 interface Storage {
     val defaultValue: String
     fun getUserId():Int
@@ -25,5 +27,8 @@ interface Storage {
     fun isOut():Boolean
 
     fun setOut(bool: Boolean)
+
+
+    var userForm:UserForm
 
 }

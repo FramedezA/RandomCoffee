@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private var retrofit: Retrofit? = null
-    private const val baseUrl = "1234567"
+    private const val baseUrl = "https://vk.com/exap.zzzz/"
 
     fun getClient(): Retrofit {
         val gsonBuilder = GsonBuilder().setLenient().create()

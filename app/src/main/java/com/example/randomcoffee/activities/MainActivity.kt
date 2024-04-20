@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initServises()
         val viewModel = ServiceLocator.getService<UsersViewModel>("UserViewModel")!!
 
         val router = ServiceLocator.getService<Router>("Router")!!

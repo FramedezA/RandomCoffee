@@ -2,6 +2,7 @@ package com.example.randomcoffee.services.users
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.randomcoffee.data_structures.UserForm
 import com.example.randomcoffee.data_structures.UserInfo
 import com.example.randomcoffee.services.Retrofit.interfaces.UserRetrofitService
 import com.example.randomcoffee.services.storage.Storage
@@ -25,6 +26,8 @@ interface UserRepository {
         password: String,
         loginCodeMutableLiveData: MutableLiveData<UserInfo>
     )
+
+    var userForm:UserForm
 }
 
 
@@ -111,6 +114,10 @@ class UserRepositoryImpl(
         })
 
     }
+
+    override var userForm: UserForm
+        get() = storage.userForm
+        set(value) {storage.userForm = value}
 
 
 }

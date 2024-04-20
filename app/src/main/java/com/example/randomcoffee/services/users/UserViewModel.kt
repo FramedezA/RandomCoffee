@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.randomcoffee.data_structures.UserForm
 import com.example.randomcoffee.data_structures.UserInfo
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,11 @@ class UsersViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val loginCodeMutable: MutableLiveData<UserInfo> = MutableLiveData()
     val loginCode: LiveData<UserInfo> = loginCodeMutable
+
+
+
+
+
     fun userOut() {
         viewModelScope.launch {
             repository.userOut(loginCodeMutable)
@@ -47,6 +53,13 @@ class UsersViewModel(private val repository: UserRepository) : ViewModel() {
             repository.loginUser(login, password, loginCodeMutable)
         }
     }
+
+
+
+    var userForm: UserForm
+        get() = repository.userForm
+        set(value) {repository.userForm=value}
+
 
 }
 

@@ -2,8 +2,13 @@ package com.example.randomcoffee.services.storage
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.randomcoffee.Utils
+import com.example.randomcoffee.data_structures.UserForm
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 
 class StorageImpl(context: Context):Storage {
+    private val gson = GsonBuilder().create()
 
 
     override val defaultValue = "-1"
@@ -40,6 +45,19 @@ class StorageImpl(context: Context):Storage {
         editor?.putBoolean("out",bool)
         editor?.apply()
     }
+
+    override var userForm: UserForm
+        get() = getUserForm()
+        set(value) {
+            val editor = preferences.edit()
+            editor?.putString("userForm", gson.toJson(value))
+            editor?.apply()
+        }
+
+     fun getUserForm():UserForm{
+         val UserFormJson = preferences.getString("userForm", gson.toJson(Utils.userForm))
+         return gson.fromJson(UserFormJson, object : TypeToken<UserForm>() {}.type)
+     }
 
 
     override fun saveId(id: String?) {
