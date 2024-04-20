@@ -15,11 +15,11 @@
             android:id="@+id/imageView3"
             android:layout_width="255dp"
             android:layout_height="255dp"
-            android:layout_marginBottom="-50dp"
             android:src="@drawable/oggetto_sign2"
-            app:layout_constraintBottom_toTopOf="@+id/sportPathTextView"
+            app:layout_constraintBottom_toTopOf="@+id/loginEditText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/loginEditText"
@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:ems="10"
+            android:fontFamily="@font/montserrat_blackitalic"
             android:hint="Введите логин"
             android:inputType="text"
             android:textColorHint="@color/greyForHZ"
@@ -43,15 +44,15 @@
             android:id="@+id/sportPathTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="120dp"
+            android:fontFamily="@font/montserrat_black"
             android:shadowColor="@color/black"
             android:text="Random Coffee"
             android:textColor="@color/backGr2FromYa"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/loginEditText"
             app:layout_constraintEnd_toEndOf="@+id/loginEditText"
-            app:layout_constraintStart_toStartOf="@+id/loginEditText" />
+            app:layout_constraintStart_toStartOf="@+id/loginEditText"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:ems="10"
+            android:fontFamily="@font/montserrat_blackitalic"
             android:hint="Введите пароль"
             android:inputType="textPassword"
             android:textColorHint="@color/greyForHZ"
@@ -74,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_black"
             android:text="Ещё нет аккаунта?"
             android:textColor="@color/black21"
             android:textSize="16sp"
@@ -87,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_black"
             android:text="Зарегистрироваться"
             android:textColor="@color/greyForHZ"
             android:textSize="16sp"
@@ -115,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FEE300"
+                    android:fontFamily="@font/montserrat_black"
                     android:text="Войти"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
