@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
             if (it.loginStatusCode !=-5){
             when (it.loginStatusCode) {
                 0 -> {
-                    router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MAP)
+                    router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_PROFILE)
                 }
                 else -> Toast.makeText(
                     requireContext(),

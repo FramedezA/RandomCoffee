@@ -47,14 +47,14 @@ class StorageImpl(context: Context):Storage {
     }
 
     override var userForm: UserForm
-        get() = getUserForm()
+        get() = getUserForm_()
         set(value) {
             val editor = preferences.edit()
             editor?.putString("userForm", gson.toJson(value))
             editor?.apply()
         }
 
-     fun getUserForm():UserForm{
+     fun getUserForm_():UserForm{
          val UserFormJson = preferences.getString("userForm", gson.toJson(Utils.userForm))
          return gson.fromJson(UserFormJson, object : TypeToken<UserForm>() {}.type)
      }

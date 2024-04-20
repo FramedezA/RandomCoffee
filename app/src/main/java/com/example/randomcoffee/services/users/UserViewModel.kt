@@ -61,6 +61,13 @@ class UsersViewModel(private val repository: UserRepository) : ViewModel() {
         set(value) {repository.userForm=value}
 
 
+    fun sendUserForm(){
+        viewModelScope.launch {
+            repository.setUserForm()
+        }
+    }
+
+
 }
 
 class UsersViewModelFactory(private val userRepository: UserRepository) :

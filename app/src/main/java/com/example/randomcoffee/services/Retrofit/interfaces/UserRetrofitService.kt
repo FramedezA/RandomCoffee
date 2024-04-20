@@ -1,22 +1,34 @@
 package com.example.randomcoffee.services.Retrofit.interfaces
 
+import com.example.randomcoffee.data_structures.LoginRequest
+import com.example.randomcoffee.data_structures.RegisterRequest
 import com.example.randomcoffee.data_structures.UserInfo
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface UserRetrofitService {
-    @GET("register/{username}/{email}/{password}")
+    @POST("register")
     fun regNewUser(
-        @Path("username") userName: String,
-        @Path("email") email: String,
-        @Path("password") password: String
+        @Body registerRequest: RegisterRequest
     ): Call<String>
 
 
-    @GET("login/{email}/{password}")
+    @POST("login")
     fun loginUser(
-        @Path("email") email: String,
-        @Path("password") password: String
+        @Body loginRequest: LoginRequest
     ): Call<UserInfo>
+
+    @GET("/set_form/{user_id}/{name}/{surname}/{age}/{sex}/{about}/{telegram}")
+    fun setForm(
+        @Path("user_id") userId:Int,
+        @Path("name") name:String,
+        @Path("surname") surname:String,
+        @Path("age") age:Int,
+        @Path("sex") sex:String,
+        @Path("about") about:String,
+        @Path("telegram") telegram:String,
+    ):Call<String>
 }

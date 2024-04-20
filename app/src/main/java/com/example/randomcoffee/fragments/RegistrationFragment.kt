@@ -40,7 +40,7 @@ class RegistrationFragment : Fragment() {
                 -2 -> makeToast("Пользователь с таким именем уже существует")
 
                 else -> {
-                    router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MAP)
+                    router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_PROFILE)
                 }
             }
 

@@ -2,6 +2,8 @@ package com.example.randomcoffee.services.users
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.randomcoffee.data_structures.LoginRequest
+import com.example.randomcoffee.data_structures.RegisterRequest
 import com.example.randomcoffee.data_structures.UserForm
 import com.example.randomcoffee.data_structures.UserInfo
 import com.example.randomcoffee.services.Retrofit.interfaces.UserRetrofitService
@@ -27,14 +29,16 @@ interface UserRepository {
         loginCodeMutableLiveData: MutableLiveData<UserInfo>
     )
 
-    var userForm:UserForm
+    fun setUserForm()
+
+    var userForm: UserForm
 }
 
 
 class UserRepositoryImpl(
     private val retrofitService: UserRetrofitService,
     private val storage: Storage
-):UserRepository {
+) : UserRepository {
 
 
     override fun getUserName(): String {
@@ -47,7 +51,7 @@ class UserRepositoryImpl(
 
 
     override fun userOut(loginCodeMutableLiveData: MutableLiveData<UserInfo>) {
-        loginCodeMutableLiveData.value = UserInfo(-5, "", -1)
+        loginCodeMutableLiveData.value = UserInfo(-5, -1)
         storage.clearUserData()
     }
 
@@ -57,8 +61,8 @@ class UserRepositoryImpl(
         password: String,
         userIdMutableLiveData: MutableLiveData<Int>
     ) {
-
-        retrofitService.regNewUser(userName, login, password)
+        val registerRequest = RegisterRequest(login, password)
+        retrofitService.regNewUser(registerRequest)
             .enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful) {
@@ -67,7 +71,7 @@ class UserRepositoryImpl(
                             if (it != null) {
                                 if (it > 0) {
                                     storage.saveId(it.toString())
-                                    storage.saveUserName(userName)
+                                    //storage.saveUserName(userName)
                                 }
                             }
                         }
@@ -84,13 +88,13 @@ class UserRepositoryImpl(
     }
 
 
-
     override fun loginUser(
         login: String,
         password: String,
         loginCodeMutableLiveData: MutableLiveData<UserInfo>
     ) {
-        retrofitService.loginUser(login, password).enqueue(object : Callback<UserInfo> {
+        val loginRequest = LoginRequest(login, password)
+        retrofitService.loginUser(loginRequest).enqueue(object : Callback<UserInfo> {
             override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
                 if (response.isSuccessful) {
                     loginCodeMutableLiveData.value = response.body()
@@ -98,7 +102,7 @@ class UserRepositoryImpl(
                         loginCodeMutableLiveData.value.let {
                             storage.saveUserLogged(true)
                             storage.saveId(it!!.userId.toString())
-                            storage.saveUserName(it.userName)
+//                            storage.saveUserName(it.userName)
 
                         }
                     }
@@ -115,9 +119,36 @@ class UserRepositoryImpl(
 
     }
 
+    override fun setUserForm() {
+        Log.d("mLogID", storage.getUserId().toString())
+
+        retrofitService.setForm(
+            storage.getUserId(),
+            userForm.name,
+            userForm.surname,
+            userForm.age,
+            userForm.sex,
+            userForm.about,
+            userForm.telegram
+        ).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("mLogERR", "$t   $call")
+            }
+
+        })
+    }
+
+
     override var userForm: UserForm
         get() = storage.userForm
-        set(value) {storage.userForm = value}
+        set(value) {
+            storage.userForm = value
+        }
 
 
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.randomcoffee.R
 import com.example.randomcoffee.services.FragmentFactory
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initServises()
         val viewModel = ServiceLocator.getService<UsersViewModel>("UserViewModel")!!
-
         val router = ServiceLocator.getService<Router>("Router")!!
 
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
         if (viewModel.isUserLogged()) {
-          //  router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MAP)
+            router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_PROFILE)
         } else {
             router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_LOGIN)
         }
@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initServises(){
         val storage = StorageImpl(this)
+
 
         ServiceLocator.registerService(
             "Router",
