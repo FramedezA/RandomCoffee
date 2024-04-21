@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_LOGIN)
         }
-        findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemReselectedListener { item ->
+        findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener  { item ->
             when (item.itemId) {
                 R.id.home -> {
                     router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_PROFILE)
