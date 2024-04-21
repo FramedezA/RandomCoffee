@@ -12,6 +12,8 @@ import com.example.randomcoffee.Utils
 import com.example.randomcoffee.data_structures.UserForm
 import com.example.randomcoffee.databinding.FragmentLoginBinding
 import com.example.randomcoffee.databinding.FragmentProfileBinding
+import com.example.randomcoffee.services.FragmentFactory
+import com.example.randomcoffee.services.Router
 import com.example.randomcoffee.services.ServiceLocator
 import com.example.randomcoffee.services.users.UsersViewModel
 
@@ -47,13 +49,19 @@ class ProfileFragment : Fragment() {
         }
         binding.nameFormEditText.doOnTextChanged { text, _, _, _ ->
             userForm.name = text.toString().trim()
+            viewModel.userForm = userForm
+
         }
         binding.surnameEditText.doOnTextChanged { text, _, _, _ ->
             userForm.surname = text.toString().trim()
+            viewModel.userForm = userForm
+
         }
         binding.ageEditText.doOnTextChanged { text, _, _, _ ->
             if(text.toString().length!=0){
                 userForm.age = text.toString().trim().toInt()
+                viewModel.userForm = userForm
+
             }
             else{
                 userForm.age = 0
@@ -61,9 +69,13 @@ class ProfileFragment : Fragment() {
         }
         binding.aboutEditText.doOnTextChanged { text, _, _, _ ->
             userForm.about = text.toString().trim()
+            viewModel.userForm = userForm
+
         }
         binding.telegramEditText.doOnTextChanged { text, _, _, _ ->
             userForm.telegram = text.toString().trim()
+            viewModel.userForm = userForm
+
         }
         if( userForm.sex == "male"){
         binding.manRadioButton.isChecked = true
@@ -77,13 +89,36 @@ class ProfileFragment : Fragment() {
         }
 
         binding.manRadioButton.setOnClickListener {
+            binding.profilePhoto.setImageResource(R.drawable.man)
+
             userForm.sex = "male"
+            viewModel.userForm = userForm
+
             binding.womanRadioButton.isChecked = false
+
 
         }
         binding.womanRadioButton.setOnClickListener {
             userForm.sex = "female"
+            viewModel.userForm = userForm
+
             binding.manRadioButton.isChecked = false
+            binding.profilePhoto.setImageResource(R.drawable.woooooman)
+
+        }
+        if (userForm.sex == "male"){
+            binding.profilePhoto.setImageResource(R.drawable.man)
+
+        }
+        else{
+            binding.profilePhoto.setImageResource(R.drawable.woooooman)
+
+        }
+        binding.toolbarProfile.menu.getItem(0).setOnMenuItemClickListener {
+            ServiceLocator.getService<Router>("Router")!!
+                .addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_LOGIN)
+            viewModel.userOut()
+            return@setOnMenuItemClickListener true
         }
     }
 
@@ -96,8 +131,7 @@ class ProfileFragment : Fragment() {
         }
 
     }
-    fun saveForm(){
-    }
+
 
 
 }

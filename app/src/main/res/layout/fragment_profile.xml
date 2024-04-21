@@ -34,7 +34,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:title="Профиль"
-                    app:titleTextColor="@color/black" />
+                    app:titleTextColor="@color/black"
+                    app:menu="@menu/menu"/>
 
                 <ImageView
                     android:id="@+id/profilePhoto"
@@ -53,7 +54,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_black"
-                    android:text="surname"
+                    android:hint="Фамилия"
                     android:textColor="@color/greyForHZ"
                     app:layout_constraintBottom_toBottomOf="@+id/profilePhoto"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_black"
-                    android:text="name"
+                    android:hint="Имя"
                     android:textColor="@color/greyForHZ"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profilePhoto"
@@ -158,7 +159,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/montserrat_black"
-                    android:text="живу кайфую, в Росте я тусую"
+                    android:hint="живу кайфую, в Росте я тусую"
                     android:textColor="@color/greyForHZ"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -186,7 +187,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/montserrat_black"
-                    android:text="\@dadaya"
+                    android:hint="\@dadaya"
                     android:textColor="@color/greyForHZ"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"

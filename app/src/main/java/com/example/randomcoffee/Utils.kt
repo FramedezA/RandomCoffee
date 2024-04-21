@@ -8,7 +8,7 @@ import java.util.Date
 import java.util.Locale
 
 object Utils {
-    val userForm = UserForm(" "," "," ",25," ","dffvb")
+    val userForm = UserForm("","","",25,"","")
 
 
     fun getNextMondayDate(): String {
