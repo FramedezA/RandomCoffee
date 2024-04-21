@@ -54,7 +54,8 @@ class StorageImpl(context: Context):Storage {
             editor?.apply()
         }
 
-     fun getUserForm_():UserForm{
+
+    fun getUserForm_():UserForm{
          val UserFormJson = preferences.getString("userForm", gson.toJson(Utils.userForm))
          return gson.fromJson(UserFormJson, object : TypeToken<UserForm>() {}.type)
      }
@@ -71,4 +72,15 @@ class StorageImpl(context: Context):Storage {
         editor?.clear()
         editor?.apply()
     }
+
+
+    override var isCoffee: Boolean
+        get() =preferences.getBoolean("coffee",false)
+        set(value) {
+            val editor = preferences.edit()
+            editor?.putBoolean("coffee", value)
+            editor?.apply()
+        }
+
+
 }

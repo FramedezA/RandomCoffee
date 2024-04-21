@@ -20,6 +20,16 @@ class UsersViewModel(private val repository: UserRepository) : ViewModel() {
     private val loginCodeMutable: MutableLiveData<UserInfo> = MutableLiveData()
     val loginCode: LiveData<UserInfo> = loginCodeMutable
 
+    private val meetingIsSetMutableLiveData: MutableLiveData<Int> = MutableLiveData()
+    val meetingIsSet: LiveData<Int> = meetingIsSetMutableLiveData
+
+    private val companionFormMutableLiveData: MutableLiveData<UserForm> = MutableLiveData()
+    val companionForm: LiveData<UserForm> = companionFormMutableLiveData
+
+    private val historyMutableLiveData: MutableLiveData<List<UserForm>> = MutableLiveData()
+    val history: LiveData<List<UserForm>> = historyMutableLiveData
+
+
 
 
 
@@ -64,6 +74,32 @@ class UsersViewModel(private val repository: UserRepository) : ViewModel() {
     fun sendUserForm(){
         viewModelScope.launch {
             repository.setUserForm()
+        }
+    }
+
+    var isCoffee:Boolean
+        get() = repository.isCoffee
+        set(value) {repository.isCoffee = value}
+
+    fun sendMeetingAgreement(during:Int){
+        viewModelScope.launch {
+            repository.addMeetingAgreement(during)
+        }
+    }
+    fun checkMittings(){
+        viewModelScope.launch {
+            repository.checkMeetings(meetingIsSetMutableLiveData)
+        }
+    }
+    fun getCompanionForm(){
+        viewModelScope.launch {
+            repository.getCompanionForm(companionFormMutableLiveData)
+        }
+    }
+
+    fun getHistory(){
+        viewModelScope.launch {
+            repository.getHistory(historyMutableLiveData)
         }
     }
 

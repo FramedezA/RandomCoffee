@@ -31,6 +31,18 @@ interface UserRepository {
     fun setUserForm()
 
     var userForm: UserForm
+
+
+    var isCoffee:Boolean
+
+    fun addMeetingAgreement(during:Int)
+
+    fun checkMeetings(meetingIsSetMutableLiveData: MutableLiveData<Int>)
+
+    fun getCompanionForm(
+        companionFormMutableLiveData: MutableLiveData<UserForm>
+    )
+    fun getHistory(historyMutableLiveData:MutableLiveData<List<UserForm>>)
 }
 
 
@@ -147,6 +159,87 @@ class UserRepositoryImpl(
         set(value) {
             storage.userForm = value
         }
+    override var isCoffee: Boolean
+        get() = storage.isCoffee
+        set(value) {storage.isCoffee = value}
+
+    override fun addMeetingAgreement(during: Int) {
+        Log.d("mLogID", storage.getUserId().toString())
+
+        retrofitService.sendMeetingAgreement(
+            storage.getUserId(),
+            during
+
+        ).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("mLogERR", "$t   $call")
+            }
+
+        })
+    }
+    override fun checkMeetings(
+        meetingIsSetMutableLiveData: MutableLiveData<Int>
+    ) {
+        retrofitService.checkMeetings(storage.getUserId())
+            .enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful) {
+                        meetingIsSetMutableLiveData.value = response.body()!!.toInt()
+
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("mLogERR", t.message.toString())
+                }
+            })
+
+    }
+    override fun getCompanionForm(
+        companionFormMutableLiveData: MutableLiveData<UserForm>
+    ) {
+        retrofitService.getCompanionFormByUserId(storage.getUserId())
+            .enqueue(object : Callback<UserForm> {
+                override fun onResponse(call: Call<UserForm>, response: Response<UserForm>) {
+                    if (response.isSuccessful) {
+                        companionFormMutableLiveData.value = response.body()
+
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<UserForm>, t: Throwable) {
+                    Log.d("mLogERR", t.message.toString())
+                }
+            })
+
+    }
+
+    override fun getHistory(historyMutableLiveData: MutableLiveData<List<UserForm>>) {
+        retrofitService.getHistory(storage.getUserId())
+            .enqueue(object : Callback<List<UserForm>> {
+                override fun onResponse(call: Call<List<UserForm>>, response: Response<List<UserForm>>) {
+                    if (response.isSuccessful) {
+                        historyMutableLiveData.value = response.body()
+
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<List<UserForm>>, t: Throwable) {
+                    Log.d("mLogERR", t.message.toString())
+                }
+            })
+    }
 
 
 }

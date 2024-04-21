@@ -31,4 +31,7 @@ interface Storage {
 
     var userForm:UserForm
 
+
+    var isCoffee:Boolean
+
 }

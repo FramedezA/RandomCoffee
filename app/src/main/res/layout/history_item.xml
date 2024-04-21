@@ -9,7 +9,6 @@
         android:id="@+id/operationNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat_black"
         android:text="Встреча 1"
@@ -17,23 +16,9 @@
         android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/DateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/montserrat_black"
-        android:text="20.04.2024"
-        android:textColor="@color/greyForHZ"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/operationNameTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/operationNameTextView" />
 
     <TextView
         android:id="@+id/stateTextView"
@@ -50,4 +35,19 @@
         app:layout_constraintEnd_toEndOf="@+id/operationNameTextView"
         app:layout_constraintStart_toStartOf="@+id/operationNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/operationNameTextView" />
+
+    <TextView
+        android:id="@+id/telegram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_black"
+        android:text="телеграм"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/stateTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/stateTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

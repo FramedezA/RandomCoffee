@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var router: Router
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +30,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initServises()
         val viewModel = ServiceLocator.getService<UsersViewModel>("UserViewModel")!!
-        val router = ServiceLocator.getService<Router>("Router")!!
+        router = ServiceLocator.getService<Router>("Router")!!
 
 
-
+        viewModel.meetingIsSet.observe(this) {
+         checkMeeting(it)
+        }
 
 
         if (viewModel.isUserLogged()) {
@@ -55,8 +58,12 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this,"Заполните все поля!",Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MEETING)
-
+                        if(viewModel.isCoffee){
+                            viewModel.checkMittings()
+                        }
+                        else{
+                            router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MEETING_CONFIRM)
+                        }
                     }
                     true
                 }
@@ -67,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this,"Заполните все поля!",Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MEETING)
+                        router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_HISTORY)
 
                     }
                     // Обработка нажатия на пункт "Notifications"
@@ -79,6 +86,16 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+    fun checkMeeting(meetingState:Int){
+        if(meetingState==0){
+            router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MEETING_CONFIRM)
+
+        }
+        else{
+            router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_MEETING)
+
+        }
     }
 
 
@@ -92,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.place_holder,
                 supportFragmentManager,
                 FragmentFactory(),
-                findViewById<BottomNavigationView>(R.id.bottom_navigation)
+                findViewById(R.id.bottom_navigation)
             )
         )
         ServiceLocator.registerService(

@@ -47,6 +47,8 @@ class Router(private val containerId: Int, private val fragmentManager: Fragment
             FragmentFactory.FRAGMENT_LOGIN->state = View.GONE
             FragmentFactory.FRAGMENT_REGISTRATION->state = View.GONE
             FragmentFactory.FRAGMENT_MEETING_CONFIRM->state = View.VISIBLE
+             FragmentFactory.FRAGMENT_HISTORY->state = View.VISIBLE
+
         }
         bottomNavigationView.visibility = state
     }
