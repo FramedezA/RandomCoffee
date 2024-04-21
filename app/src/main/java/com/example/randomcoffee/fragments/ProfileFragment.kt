@@ -75,11 +75,15 @@ class ProfileFragment : Fragment() {
             binding.womanRadioButton.isChecked = true
 
         }
+
         binding.manRadioButton.setOnClickListener {
             userForm.sex = "male"
+            binding.womanRadioButton.isChecked = false
+
         }
         binding.womanRadioButton.setOnClickListener {
             userForm.sex = "female"
+            binding.manRadioButton.isChecked = false
         }
     }
 
