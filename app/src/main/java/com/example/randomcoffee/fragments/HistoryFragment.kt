@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.randomcoffee.R
 import com.example.randomcoffee.data_structures.UserForm
 import com.example.randomcoffee.databinding.FragmentHistoryBinding
 import com.example.randomcoffee.services.HistoryAdapter
@@ -26,7 +27,8 @@ class HistoryFragment : Fragment() {
             setUpRecycler(it)
         }
 
-
+        binding.toolbarHistory.setLogo(R.drawable.oggetto_small)
+        binding.toolbarHistory.setTitleTextAppearance(requireContext(), R.style.CustomToolbarStyle)
     }
 
 

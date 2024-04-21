@@ -35,6 +35,8 @@ class MeetingFragment : Fragment() {
             binding.meetIsCompleted.text = "Это печалька("
         }
 
+        binding.toolbarMeeting2.setLogo(R.drawable.oggetto_small)
+        binding.toolbarMeeting2.setTitleTextAppearance(requireContext(), R.style.CustomToolbarStyle)
     }
 
     override fun onCreateView(

@@ -44,6 +44,9 @@ class MeetingConfirmFragment : Fragment() {
             binding.stateTV.text = "Вы отказались от участия"
 
         }
+
+        binding.toolbarMeeting.setLogo(R.drawable.oggetto_small)
+        binding.toolbarMeeting.setTitleTextAppearance(requireContext(), R.style.CustomToolbarStyle)
     }
 
     override fun onCreateView(
