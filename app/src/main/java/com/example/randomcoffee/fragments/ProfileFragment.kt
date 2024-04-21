@@ -30,6 +30,9 @@ class ProfileFragment : Fragment() {
         userForm = viewModel.userForm
         loadUserForm()
 
+        binding.toolbarProfile.setLogo(R.drawable.oggetto_small)
+        binding.toolbarProfile.setTitleTextAppearance(requireContext(),R.style.CustomToolbarStyle)
+
     }
 
     override fun onCreateView(
@@ -46,6 +49,7 @@ class ProfileFragment : Fragment() {
             binding.ageEditText.setText(userForm.age.toString())
             binding.aboutEditText.setText(userForm.about)
             binding.telegramEditText.setText(userForm.telegram)
+
         }
         binding.nameFormEditText.doOnTextChanged { text, _, _, _ ->
             userForm.name = text.toString().trim()
