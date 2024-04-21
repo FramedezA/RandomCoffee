@@ -1,11 +1,13 @@
 package com.example.randomcoffee.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.randomcoffee.R
@@ -45,6 +47,11 @@ class MainActivity : AppCompatActivity() {
             router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_LOGIN)
         }
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener  { item ->
+            // Получаем ссылку на InputMethodManager
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+            // Закрываем клавиатуру
+            inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
             when (item.itemId) {
                 R.id.home -> {
                     router.addFragmentWithoutBackStack(FragmentFactory.FRAGMENT_PROFILE)
