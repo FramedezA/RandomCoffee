@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.example.randomcoffee.R
 import com.example.randomcoffee.Utils
@@ -51,7 +52,12 @@ class ProfileFragment : Fragment() {
             userForm.surname = text.toString().trim()
         }
         binding.ageEditText.doOnTextChanged { text, _, _, _ ->
-            userForm.age = text.toString().trim().toInt()
+            if(text.toString().length!=0){
+                userForm.age = text.toString().trim().toInt()
+            }
+            else{
+                userForm.age = 0
+            }
         }
         binding.aboutEditText.doOnTextChanged { text, _, _, _ ->
             userForm.about = text.toString().trim()
@@ -79,9 +85,12 @@ class ProfileFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        viewModel.userForm = userForm
+        if (userForm.name != "" && userForm.surname != "" && userForm.age != 0 && userForm.about != "" && userForm.telegram != "") {
+            viewModel.userForm = userForm
 
-        viewModel.sendUserForm()
+            viewModel.sendUserForm()
+        }
+
     }
     fun saveForm(){
     }

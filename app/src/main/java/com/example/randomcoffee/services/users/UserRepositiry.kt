@@ -17,7 +17,6 @@ interface UserRepository {
     fun isUserLogged(): Boolean
     fun userOut(loginCodeMutableLiveData: MutableLiveData<UserInfo>)
     fun getNewUser(
-        userName: String,
         login: String,
         password: String,
         userIdMutableLiveData: MutableLiveData<Int>
@@ -56,7 +55,6 @@ class UserRepositoryImpl(
     }
 
     override fun getNewUser(
-        userName: String,
         login: String,
         password: String,
         userIdMutableLiveData: MutableLiveData<Int>

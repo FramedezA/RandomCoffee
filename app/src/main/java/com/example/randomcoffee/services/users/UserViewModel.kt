@@ -30,9 +30,9 @@ class UsersViewModel(private val repository: UserRepository) : ViewModel() {
         }
     }
 
-    fun regNewUser(userName: String, login: String, password: String) {
+    fun regNewUser(login: String, password: String) {
         viewModelScope.launch {
-            repository.getNewUser(userName, login, password, userIdMutable)
+            repository.getNewUser(login, password, userIdMutable)
         }
     }
 

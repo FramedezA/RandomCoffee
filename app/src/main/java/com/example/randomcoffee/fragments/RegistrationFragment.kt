@@ -48,13 +48,11 @@ class RegistrationFragment : Fragment() {
         binding.registerButton.setOnClickListener {
             val passwordLength = binding.regPasswordEditText.text.toString().length
             val loginLength = binding.regLoginEditText.text.toString().length
-            val nameLength = binding.nameEditText.text.toString().length
 
 
             if ( passwordLength in 8 until 40) {
 
                 viewModel.regNewUser(
-                    binding.nameEditText.text.toString(),
                     binding.regLoginEditText.text.toString(),
                     binding.regPasswordEditText.text.toString()
                 )
@@ -67,9 +65,6 @@ class RegistrationFragment : Fragment() {
             }
             else if (loginLength >= 40) {
                 makeToast("Слишком много символов в поле Логина")
-
-            } else if (nameLength >= 40) {
-                makeToast("Слишком много символов в имени Пользователя")
 
             }
         }
